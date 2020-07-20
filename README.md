@@ -2,7 +2,7 @@
 
 The downlowad links for 20 GWAS summay data used in MR-APSS paper can be found at the "Table-GWAS_sources.xlsx".
 
-The file "tested_pairs" are the trait pairs involved in MR tests.
+The file "tested_pairs" are the trait pairs involved in analysis.
 
 The R code for processing datasets and implementing other compared MR methods are in "R" folder.
 
