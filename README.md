@@ -4,7 +4,7 @@ The downlowad links for 20 GWAS summay data used in MR-APSS paper can be found a
 
 The file "tested_pairs" are the trait pairs involved in analysis.
 
-The R code for processing datasets and implementing other compared MR methods are in "R" folder.
+The R code for processing datasets and running MR methods are in "R" folder.
 
 Once you have downloaded the GWAS summay data, you can used the code "Format_GWAS20.R" to format the GWAS datasets, 
 
