@@ -1,9 +1,6 @@
 library(MRAPSS)
 library(readr)
 
-## Estimating parameters for the background model using genome-wide summary statistics;
-## using plink clumping to obtain independent IVs
-
 ts1 = c("AD", "ASD", "Daytime_Sleepiness", "Height_UKB",  "Intelligence", "RA",      
         "T2D", "Alcohol", "BMI", "Depression", "IBD", "MDD", "SCZ", "Angina", 
         "CAD", "HBP", "Income", "NEB", "Smoking", "Urate", "Anorexia", 
@@ -37,7 +34,7 @@ for( exposure in ts1){
                       trait2.name = outcome,
                       h2.fix.intercept = F,
                       LDSC = T,
-                      ldscore.dir = "/import/home/share/xhu/database/1KG/eur_w_ld_chr")
+                      ldscore.dir = "eur_w_ld_chr")
     
     write.table(data.frame(exposure,
                            outcome,
@@ -71,9 +68,18 @@ for( exposure in ts1){
                      pval_col = "pval.exp",
                      clump_kb = 1000,
                      clump_r2 = 0.001,
-                     plink = "/import/home/maxhu/plink/plink",
-                     bfile = "/import/home/share/xhu/database/1KG/all_1000G_EUR_Phase3")
+                     bfile = "all_1000G_EUR_Phase3",
+                     plink_bin = "plink")
     
+    # For convenience, users can perform LD clumping through API and do not need to provide a reference panel, i.e.,
+    # clumped =  clump(paras$dat,
+    #                  IV.Threshold = 5e-05,
+    #                  SNP_col = "SNP",
+    #                  pval_col = "pval.exp",
+    #                  clump_kb = 1000,
+    #                  clump_r2 = 0.001)
+    
+
     if(inherits(clumped , 'try-error')) next
     
     
@@ -85,7 +91,4 @@ for( exposure in ts1){
   }
   
 }
-
-
-
 

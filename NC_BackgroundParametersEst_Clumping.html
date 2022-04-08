@@ -13074,6 +13074,27 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Trait-pairs-between-26-complex-traits-and-five-negative-control-outcomes-(26*5=130-pairs)">Trait pairs between 26 complex traits and five negative control outcomes (26*5=130 pairs)<a class="anchor-link" href="#Trait-pairs-between-26-complex-traits-and-five-negative-control-outcomes-(26*5=130-pairs)">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note: you may need additional files to perform the following analysis.</p>
+<ol>
+<li>For estimation of background parameters by LDSC, you need an LD score reference panel.<br>
+In our analysis, we used the 1000G European LD scores(<a href="https://data.broadinstitute.org/alkesgroup/LDSCORE/eur_w_ld_chr.tar.bz2">"eur_w_ld_chr"</a>), which are provided by the LDSC software.</li>
+<li>Users can choose to perform LD clumping locally, or using the server.<br>
+If you choose to perform LD clumping locally, you may need the following two types of files: a user-specified LD reference panel and a packaged plink binary file. In our analysis, we performed LD clumping locally. Files used in our analysis can be downloaded <a href="https://gohkust-my.sharepoint.com/:u:/g/personal/maxhu_ust_hk/ERK5HkrHdAtGlKnSLEoLlUwB5fpKxYfWlAoXby4fHSqxOw?e=1ogfrO">here</a>.</li>
+</ol>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -13093,10 +13114,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">## Estimating parameters for the background model using genome-wide summary statistics;</span>
-<span class="c1">## using plink clumping to obtain independent IVs</span>
-
-<span class="n">ts1</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;AD&quot;</span><span class="p">,</span> <span class="s">&quot;ASD&quot;</span><span class="p">,</span> <span class="s">&quot;Daytime_Sleepiness&quot;</span><span class="p">,</span> <span class="s">&quot;Height_UKB&quot;</span><span class="p">,</span>  <span class="s">&quot;Intelligence&quot;</span><span class="p">,</span> <span class="s">&quot;RA&quot;</span><span class="p">,</span>      
+<div class=" highlight hl-r"><pre><span></span><span class="n">ts1</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;AD&quot;</span><span class="p">,</span> <span class="s">&quot;ASD&quot;</span><span class="p">,</span> <span class="s">&quot;Daytime_Sleepiness&quot;</span><span class="p">,</span> <span class="s">&quot;Height_UKB&quot;</span><span class="p">,</span>  <span class="s">&quot;Intelligence&quot;</span><span class="p">,</span> <span class="s">&quot;RA&quot;</span><span class="p">,</span>      
         <span class="s">&quot;T2D&quot;</span><span class="p">,</span> <span class="s">&quot;Alcohol&quot;</span><span class="p">,</span> <span class="s">&quot;BMI&quot;</span><span class="p">,</span> <span class="s">&quot;Depression&quot;</span><span class="p">,</span> <span class="s">&quot;IBD&quot;</span><span class="p">,</span> <span class="s">&quot;MDD&quot;</span><span class="p">,</span> <span class="s">&quot;SCZ&quot;</span><span class="p">,</span> <span class="s">&quot;Angina&quot;</span><span class="p">,</span> 
         <span class="s">&quot;CAD&quot;</span><span class="p">,</span> <span class="s">&quot;HBP&quot;</span><span class="p">,</span> <span class="s">&quot;Income&quot;</span><span class="p">,</span> <span class="s">&quot;NEB&quot;</span><span class="p">,</span> <span class="s">&quot;Smoking&quot;</span><span class="p">,</span> <span class="s">&quot;Urate&quot;</span><span class="p">,</span> <span class="s">&quot;Anorexia&quot;</span><span class="p">,</span> 
         <span class="s">&quot;CD&quot;</span><span class="p">,</span> <span class="s">&quot;Height_GIANT&quot;</span><span class="p">,</span> <span class="s">&quot;Insomnia&quot;</span><span class="p">,</span> <span class="s">&quot;Neuroticism&quot;</span><span class="p">,</span> <span class="s">&quot;SWB&quot;</span><span class="p">)</span>
@@ -13129,7 +13147,7 @@ div#notebook {
                       <span class="n">trait2.name</span> <span class="o">=</span> <span class="n">outcome</span><span class="p">,</span>
                       <span class="n">h2.fix.intercept</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span>
                       <span class="n">LDSC</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span>
-                      <span class="n">ldscore.dir</span> <span class="o">=</span> <span class="s">&quot;/import/home/share/xhu/database/1KG/eur_w_ld_chr&quot;</span><span class="p">)</span>
+                      <span class="n">ldscore.dir</span> <span class="o">=</span> <span class="s">&quot;eur_w_ld_chr&quot;</span><span class="p">)</span>
     
     <span class="nf">write.table</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">exposure</span><span class="p">,</span>
                            <span class="n">outcome</span><span class="p">,</span>
@@ -13163,9 +13181,18 @@ div#notebook {
                      <span class="n">pval_col</span> <span class="o">=</span> <span class="s">&quot;pval.exp&quot;</span><span class="p">,</span>
                      <span class="n">clump_kb</span> <span class="o">=</span> <span class="m">1000</span><span class="p">,</span>
                      <span class="n">clump_r2</span> <span class="o">=</span> <span class="m">0.001</span><span class="p">,</span>
-                     <span class="n">plink</span> <span class="o">=</span> <span class="s">&quot;/import/home/maxhu/plink/plink&quot;</span><span class="p">,</span>
-                     <span class="n">bfile</span> <span class="o">=</span> <span class="s">&quot;/import/home/share/xhu/database/1KG/all_1000G_EUR_Phase3&quot;</span><span class="p">)</span>
+                     <span class="n">bfile</span> <span class="o">=</span> <span class="s">&quot;all_1000G_EUR_Phase3&quot;</span><span class="p">,</span>
+                     <span class="n">plink_bin</span> <span class="o">=</span> <span class="s">&quot;plink&quot;</span><span class="p">)</span>
     
+    <span class="c1"># For convenience, users can perform LD clumping through API and do not need to provide a reference panel, i.e.,</span>
+    <span class="c1"># clumped =  clump(paras$dat,</span>
+    <span class="c1">#                  IV.Threshold = 5e-05,</span>
+    <span class="c1">#                  SNP_col = &quot;SNP&quot;,</span>
+    <span class="c1">#                  pval_col = &quot;pval.exp&quot;,</span>
+    <span class="c1">#                  clump_kb = 1000,</span>
+    <span class="c1">#                  clump_r2 = 0.001)</span>
+    
+
     <span class="nf">if</span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">clumped</span> <span class="p">,</span> <span class="s">&#39;try-error&#39;</span><span class="p">))</span> <span class="n">next</span>
     
     
@@ -27597,19 +27624,6 @@ Removing 221 of 285 variants due to LD with other variants or absence from LD re
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
