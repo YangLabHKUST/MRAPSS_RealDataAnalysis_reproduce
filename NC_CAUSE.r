@@ -115,6 +115,6 @@ cause_res = unique(merge(unique(cause_elpd[, c("exposure","outcome","pval")]),
                          cause_est[, c("exposure","outcome","Threshold","nsnp", "b","se")],
                          by=c("exposure","outcome")))
 cause_res$Method = "CAUSE"
-write.table(cause_res, file="NC_CAUSE.MRres", append=F, col.names = T, row.names = F, quote = F)
+write.table(cause_res, file="NC_CAUSE.MRres", append=T, col.names = F, row.names = F, quote = F)
 
 
