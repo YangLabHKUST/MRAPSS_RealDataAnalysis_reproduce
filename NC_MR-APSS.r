@@ -166,6 +166,12 @@ for( exposure in ts1){
 print(proc.time()-start)
 
 
+apss_res = read.table("NC_MRAPSS.MRres", header = F)
+colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
+                        "Method", "cor.Threshold", "IVstrength", "Threshold")
+head(apss_res)
+write.table(apss_res, "NC_MRAPSS.MRres", quote=F, col.names = T, append = F,row.names = F)
+
 # Load packages
 library(latex2exp)
 library(gridExtra)
@@ -175,7 +181,7 @@ library(ggpubr)
 # Load QQ-plots functions
 source('qqplot_funcs.R')
 
-apss_res = read.table("NC_MRAPSS.MRres", header = F)
+apss_res = read.table("NC_MRAPSS.MRres", header = T)
 colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
                         "Method", "cor.Threshold", "IVstrength", "Threshold")
 apss_res = subset(apss_res, Threshold==5e-05)
@@ -283,7 +289,7 @@ library(ggpubr)
 source('qqplot_funcs.R')
 
 
-apss_res = read.table("NC_MRAPSS.MRres", header = F)
+apss_res = read.table("NC_MRAPSS.MRres", header = T)
 colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
                         "Method", "cor.Threshold", "IVstrength", "Threshold")
 apss_res = subset(apss_res, Method %in% c("MR-APSS", "MR-APSS(Cor.SelectionBia=F)"))

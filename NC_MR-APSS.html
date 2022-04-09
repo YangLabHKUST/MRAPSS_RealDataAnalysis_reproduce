@@ -20976,6 +20976,57 @@ Total NO. of IVs=  64 , NO. of valid IVs with foreground signals:  63.9936 .
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="n">apss_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">apss_res</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> <span class="s">&quot;nsnp&quot;</span><span class="p">,</span><span class="s">&quot;pi&quot;</span><span class="p">,</span><span class="s">&quot;nvalid&quot;</span><span class="p">,</span><span class="s">&quot;sigma.sq&quot;</span><span class="p">,</span><span class="s">&quot;tau.sq&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">,</span><span class="s">&quot;pval&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;Method&quot;</span><span class="p">,</span> <span class="s">&quot;cor.Threshold&quot;</span><span class="p">,</span> <span class="s">&quot;IVstrength&quot;</span><span class="p">,</span> <span class="s">&quot;Threshold&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">apss_res</span><span class="p">)</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">apss_res</span><span class="p">,</span> <span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">append</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span><span class="n">row.names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table class="dataframe">
+<caption>A data.frame: 6 × 14</caption>
+<thead>
+	<tr><th></th><th scope=col>exposure</th><th scope=col>outcome</th><th scope=col>nsnp</th><th scope=col>pi</th><th scope=col>nvalid</th><th scope=col>sigma.sq</th><th scope=col>tau.sq</th><th scope=col>b</th><th scope=col>se</th><th scope=col>pval</th><th scope=col>Method</th><th scope=col>cor.Threshold</th><th scope=col>IVstrength</th><th scope=col>Threshold</th></tr>
+	<tr><th></th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>AD</td><td>Hair_Light_Brown</td><td>69</td><td>0.2476728</td><td>17.08942</td><td>2.783954e-05</td><td>4.378918e-10</td><td>-6.722757e-03</td><td>0.018745343</td><td>0.71987</td><td>MR-APSS                    </td><td>5e-05</td><td>0.01289015</td><td>5e-05</td></tr>
+	<tr><th scope=row>2</th><td>AD</td><td>Hair_Light_Brown</td><td>69</td><td>0.2563745</td><td>17.68984</td><td>2.695711e-05</td><td>4.393785e-10</td><td>-5.793170e-03</td><td>0.017510986</td><td>0.74077</td><td>MR-APSS(Omega=0)           </td><td>5e-05</td><td>0.01313690</td><td>5e-05</td></tr>
+	<tr><th scope=row>3</th><td>AD</td><td>Hair_Light_Brown</td><td>69</td><td>0.2836725</td><td>19.57340</td><td>2.521091e-05</td><td>4.427412e-10</td><td>-8.142519e-03</td><td>0.016567372</td><td>0.62309</td><td>MR-APSS(C=I)               </td><td>5e-05</td><td>0.01374133</td><td>5e-05</td></tr>
+	<tr><th scope=row>4</th><td>AD</td><td>Hair_Light_Brown</td><td>69</td><td>0.9999000</td><td>68.99310</td><td>3.253142e-05</td><td>2.761819e-10</td><td>-1.039444e-03</td><td>0.011615897</td><td>0.92870</td><td>MR-APSS(Cor.SelectionBia=F)</td><td>5e-05</td><td>0.03103007</td><td>5e-05</td></tr>
+	<tr><th scope=row>5</th><td>AD</td><td>Hair_Dark_Brown </td><td>69</td><td>0.2470616</td><td>17.04725</td><td>2.787310e-05</td><td>4.372200e-10</td><td>-1.329731e-05</td><td>0.004386458</td><td>0.99758</td><td>MR-APSS                    </td><td>5e-05</td><td>0.01287394</td><td>5e-05</td></tr>
+	<tr><th scope=row>6</th><td>AD</td><td>Hair_Dark_Brown </td><td>69</td><td>0.2558325</td><td>17.65244</td><td>2.701280e-05</td><td>8.829424e-10</td><td> 8.722353e-04</td><td>0.017557966</td><td>0.96038</td><td>MR-APSS(Omega=0)           </td><td>5e-05</td><td>0.01312450</td><td>5e-05</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -20997,7 +21048,7 @@ Total NO. of IVs=  64 , NO. of valid IVs with foreground signals:  63.9936 .
 <span class="c1"># Load QQ-plots functions</span>
 <span class="nf">source</span><span class="p">(</span><span class="s">&#39;qqplot_funcs.R&#39;</span><span class="p">)</span>
 
-<span class="n">apss_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">apss_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">apss_res</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> <span class="s">&quot;nsnp&quot;</span><span class="p">,</span><span class="s">&quot;pi&quot;</span><span class="p">,</span><span class="s">&quot;nvalid&quot;</span><span class="p">,</span><span class="s">&quot;sigma.sq&quot;</span><span class="p">,</span><span class="s">&quot;tau.sq&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">,</span><span class="s">&quot;pval&quot;</span><span class="p">,</span>
                         <span class="s">&quot;Method&quot;</span><span class="p">,</span> <span class="s">&quot;cor.Threshold&quot;</span><span class="p">,</span> <span class="s">&quot;IVstrength&quot;</span><span class="p">,</span> <span class="s">&quot;Threshold&quot;</span><span class="p">)</span>
 <span class="n">apss_res</span> <span class="o">=</span> <span class="nf">subset</span><span class="p">(</span><span class="n">apss_res</span><span class="p">,</span> <span class="n">Threshold</span><span class="o">==</span><span class="m">5e-05</span><span class="p">)</span>
@@ -36713,7 +36764,7 @@ Total NO. of IVs=  13 , NO. of valid IVs with foreground signals:  12.9987 .
 <span class="nf">source</span><span class="p">(</span><span class="s">&#39;qqplot_funcs.R&#39;</span><span class="p">)</span>
 
 
-<span class="n">apss_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">apss_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_MRAPSS.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">apss_res</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> <span class="s">&quot;nsnp&quot;</span><span class="p">,</span><span class="s">&quot;pi&quot;</span><span class="p">,</span><span class="s">&quot;nvalid&quot;</span><span class="p">,</span><span class="s">&quot;sigma.sq&quot;</span><span class="p">,</span><span class="s">&quot;tau.sq&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">,</span><span class="s">&quot;pval&quot;</span><span class="p">,</span>
                         <span class="s">&quot;Method&quot;</span><span class="p">,</span> <span class="s">&quot;cor.Threshold&quot;</span><span class="p">,</span> <span class="s">&quot;IVstrength&quot;</span><span class="p">,</span> <span class="s">&quot;Threshold&quot;</span><span class="p">)</span>
 <span class="n">apss_res</span> <span class="o">=</span> <span class="nf">subset</span><span class="p">(</span><span class="n">apss_res</span><span class="p">,</span> <span class="n">Method</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;MR-APSS&quot;</span><span class="p">,</span> <span class="s">&quot;MR-APSS(Cor.SelectionBia=F)&quot;</span><span class="p">))</span>
