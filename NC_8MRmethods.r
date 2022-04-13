@@ -158,6 +158,8 @@ for( exposure in ts1 ){
 }
 print(proc.time()-start0)
 
+# we used the old version of MRMix(2020) in our paper.
+# The results for some trait pairs may be slightly different between the old version and the current verison.
 start0 = proc.time()
 
 for( exposure in ts1 ){
@@ -188,6 +190,8 @@ for( exposure in ts1 ){
 }
 print(proc.time()-start0)
 
+# Weighted-mode uses bootstrap to estimate the standard error. 
+# The standard errors could be slightly different since we have not set the random seed.
 start0 = proc.time()
 
 for( exposure in ts1 ){
@@ -218,6 +222,8 @@ for( exposure in ts1 ){
 }
 print(proc.time()-start0)
 
+# Weighted-mode uses bootstrap to estimate the standard error. 
+# The standard errors could be slightly different since we have not set the random seed.
 start0 = proc.time()
 
 for( exposure in ts1 ){
