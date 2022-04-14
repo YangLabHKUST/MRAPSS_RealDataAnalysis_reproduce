@@ -112,9 +112,10 @@ cause_elpd$pval = pnorm(cause_elpd$Z)
 cause_est = unique(cause_est[, c("exposure","outcome","Threshold","nsnp", "b","b_l","b_u")])
 cause_est$se = (cause_est$b_u - cause_est$b_l)/2/1.96
 cause_res = unique(merge(unique(cause_elpd[, c("exposure","outcome","pval")]),
-                         cause_est[, c("exposure","outcome","Threshold","nsnp", "b","se")],
+                         cause_est[, c("exposure","outcome","Threshold","nsnp", "beta.hat","se")],
                          by=c("exposure","outcome")))
 cause_res$Method = "CAUSE"
-write.table(cause_res, file="NC_CAUSE.MRres", append=T, col.names = F, row.names = F, quote = F)
+cause_res = cause_res[, c("exposure","outcome","Method", "Threshold", "nsnp", "beta.hat","se", "pval")]
+write.table(cause_res, file="NC_CAUSE.MRres", append=F, col.names = T, row.names = F, quote = F)
 
 

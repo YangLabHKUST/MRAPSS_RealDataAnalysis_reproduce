@@ -15634,7 +15634,9 @@ Pair:  SWB ~ Tanning        user     system    elapsed
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">MRmethods_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;NC_8methods.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">MRmethods_res</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Method&quot;</span><span class="p">,</span> <span class="s">&quot;Threshold&quot;</span><span class="p">,</span> <span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;beta.hat&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">,</span> <span class="s">&quot;pval&quot;</span><span class="p">)</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">MRmethods_res</span><span class="p">,</span> <span class="s">&quot;NC_8methods.MRres&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">append</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span><span class="n">row.names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
     </div>

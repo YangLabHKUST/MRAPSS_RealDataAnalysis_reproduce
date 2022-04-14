@@ -296,4 +296,7 @@ for( exposure in ts1 ){
 }
 print(proc.time()-start0)
 
+MRmethods_res = read.table("NC_8methods.MRres", header = F)
+colnames(MRmethods_res) = c("exposure","outcome","Method", "Threshold", "nsnp", "beta.hat","se", "pval")
+write.table(MRmethods_res, "NC_8methods.MRres", quote=F, col.names = T, append = F,row.names = F)
 
