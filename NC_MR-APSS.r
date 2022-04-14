@@ -172,40 +172,6 @@ colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","ta
 head(apss_res)
 write.table(apss_res, "NC_MRAPSS.MRres", quote=F, col.names = T, append = F,row.names = F)
 
-# Load packages
-library(latex2exp)
-library(gridExtra)
-library(ggplot2)
-library(ggpubr)
-
-# Load QQ-plots functions
-source('qqplot_funcs.R')
-
-apss_res = read.table("NC_MRAPSS.MRres", header = T)
-colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
-                        "Method", "cor.Threshold", "IVstrength", "Threshold")
-apss_res = subset(apss_res, Threshold==5e-05)
-apss_res_dcast = na.omit(reshape2::dcast(unique(apss_res), exposure + outcome ~ Method, value.var = "pval", drop = T))
-
-p1 = qqplot1(apss_res_dcast , "MR-APSS", max=5)+
-  scale_color_manual(values = c("#E64B35FF"),
-                     labels = list(TeX("MR-APSS"))) 
-
-p2 = qqplot2(apss_res_dcast , "MR-APSS", "MR-APSS(Omega=0)", max=5) +
-  scale_color_manual(values = c("#E64B35FF", "#FFA319FF"),
-                     labels = list("MR-APSS", TeX("MR-APSS ($\\Omega = 0$)"))) 
-
-p3 = qqplot2(apss_res_dcast , "MR-APSS", "MR-APSS(C=I)", max=5) +
-  scale_color_manual(values = c("#E64B35FF", "#767676FF"),
-                     labels = list("MR-APSS", "MR-APSS (C = I)")) 
-
-p4 = qqplot2(apss_res_dcast , "MR-APSS", "MR-APSS(Cor.SelectionBia=F)", max=5, mark=F) +
-  scale_color_manual(values = c("#E64B35FF", "#8A9045FF"),
-                     labels = list("MR-APSS", "MR-APSS (Cor.SelectionBia=F)"))
-
-options(repr.plot.width = 13, repr.plot.height = 10, repr.plot.res = 100)
-grid.arrange(p1,p2,p3,p4, layout_matrix = matrix(c(1,2,3,4), ncol =2, byrow = T))
-
 # All the results will be saved to the file "NC_MRAPSS.MRres"
 start = proc.time()
 ts1 = c("AD", "ASD", "Daytime_Sleepiness", "Height_UKB",  "Intelligence", "RA",      
@@ -278,38 +244,3 @@ for( exposure in ts1){
 }
 
 print(proc.time()-start)
-
-# Load packages
-library(latex2exp)
-library(gridExtra)
-library(ggplot2)
-library(ggpubr)
-
-# Load QQ-plots functions
-source('qqplot_funcs.R')
-
-
-apss_res = read.table("NC_MRAPSS.MRres", header = T)
-colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
-                        "Method", "cor.Threshold", "IVstrength", "Threshold")
-apss_res = subset(apss_res, Method %in% c("MR-APSS", "MR-APSS(Cor.SelectionBia=F)"))
-apss_res_dcast = na.omit(reshape2::dcast(unique(apss_res), exposure + outcome ~ Method + Threshold, 
-                                         value.var = "pval", drop = T))
-
-qq.apss = qqplot4(apss_res_dcast, "MR-APSS_5e-05", "MR-APSS_5e-06","MR-APSS_5e-07","MR-APSS_5e-08",
-                  comp.labels = c("5e-05","5e-06","5e-07","5e-08"),
-                   max=5, strong = "MR-APSS_5e-05") +
-  xlim(0,4) +
-  ggtitle("MR-APSS") 
-
-qq.apss_selecF = qqplot4(apss_res_dcast, "MR-APSS(Cor.SelectionBia=F)_5e-05", "MR-APSS(Cor.SelectionBia=F)_5e-06",
-                                "MR-APSS(Cor.SelectionBia=F)_5e-07","MR-APSS(Cor.SelectionBia=F)_5e-08",
-                  comp.labels = c("5e-05","5e-06","5e-07","5e-08"),
-                  max=5) +
-  xlim(0,4) +
-  guides(colour = guide_legend("IV threshold")) +
-  ggtitle(expression(atop("MR-APSS", "(without accounting for selection bias)"))) 
- 
-options(repr.plot.width = 13, repr.plot.height = 5, repr.plot.res = 100)
-grid.arrange(qq.apss,qq.apss_selecF, layout_matrix = matrix(c(1,2), ncol =2, byrow = T))
-
