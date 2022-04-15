@@ -166,8 +166,8 @@ for( exposure in ts1){
 print(proc.time()-start)
 
 
-apss_res = read.table("NC_MRAPSS.MRres", header = F)
-colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","b","se","pval",
+apss_res = read.table("NC_MRAPSS.MRres", header = T)
+colnames(apss_res) = c("exposure","outcome", "nsnp","pi","nvalid","sigma.sq","tau.sq","beta.hat","se","pval",
                         "Method", "cor.Threshold", "IVstrength", "Threshold")
 head(apss_res)
 write.table(apss_res, "NC_MRAPSS.MRres", quote=F, col.names = T, append = F,row.names = F)
