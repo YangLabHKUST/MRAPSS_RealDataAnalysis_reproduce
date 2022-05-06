@@ -13106,7 +13106,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
@@ -13120,20 +13120,23 @@ div#notebook {
 
 <span class="n">Threshold</span><span class="o">=</span><span class="m">1e-03</span>
 
+<span class="n">start</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
 <span class="nf">for</span><span class="p">(</span> <span class="n">exposure</span> <span class="n">in</span> <span class="n">ts1</span> <span class="p">){</span>
   
   <span class="nf">for</span><span class="p">(</span> <span class="n">outcome</span> <span class="n">in</span> <span class="n">ts2</span> <span class="p">){</span>
     
-    <span class="n">start</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
+
     
     <span class="nf">if</span><span class="p">(</span><span class="n">exposure</span><span class="o">==</span><span class="n">outcome</span><span class="p">)</span> <span class="n">next</span>
     
     <span class="c1"># read GWAS summary statistics</span>
     <span class="nf">cat</span><span class="p">(</span><span class="n">exposure</span><span class="p">,</span><span class="s">&quot;~&quot;</span><span class="p">,</span><span class="n">outcome</span><span class="p">,</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
     
-    <span class="n">X1</span> <span class="o">=</span> <span class="n">readr</span><span class="o">::</span><span class="nf">read_delim</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;./GWAS_26and5_formatted/&quot;</span><span class="p">,</span> <span class="n">exposure</span><span class="p">),</span> <span class="n">delim</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">escape_double</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">trim_ws</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+    <span class="n">X1</span> <span class="o">=</span> <span class="nf">suppressMessages</span><span class="p">(</span><span class="n">readr</span><span class="o">::</span><span class="nf">read_delim</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;./GWAS_26and5_formatted/&quot;</span><span class="p">,</span> <span class="n">exposure</span><span class="p">),</span> <span class="n">delim</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span>
+                                     <span class="n">escape_double</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">trim_ws</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="bp">F</span><span class="p">))</span>
     
-    <span class="n">X2</span> <span class="o">=</span> <span class="n">readr</span><span class="o">::</span><span class="nf">read_delim</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;./GWAS_26and5_formatted/&quot;</span><span class="p">,</span> <span class="n">outcome</span><span class="p">),</span> <span class="n">delim</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">escape_double</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">trim_ws</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+    <span class="n">X2</span> <span class="o">=</span> <span class="nf">suppressMessages</span><span class="p">(</span><span class="n">readr</span><span class="o">::</span><span class="nf">read_delim</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;./GWAS_26and5_formatted/&quot;</span><span class="p">,</span> <span class="n">outcome</span><span class="p">),</span> <span class="n">delim</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span>
+                                     <span class="n">escape_double</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">trim_ws</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">progress</span> <span class="o">=</span> <span class="bp">F</span><span class="p">))</span>
     
     <span class="n">X1</span><span class="o">$</span><span class="n">b</span> <span class="o">=</span> <span class="n">X1</span><span class="o">$</span><span class="n">Z</span><span class="o">/</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">X1</span><span class="o">$</span><span class="n">N</span><span class="p">)</span>
     <span class="n">X2</span><span class="o">$</span><span class="n">b</span> <span class="o">=</span> <span class="n">X2</span><span class="o">$</span><span class="n">Z</span><span class="o">/</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">X2</span><span class="o">$</span><span class="n">N</span><span class="p">)</span>
@@ -13203,13 +13206,12 @@ div#notebook {
       <span class="nf">rm</span><span class="p">(</span><span class="n">res_elpd</span><span class="p">)</span>
       <span class="nf">rm</span><span class="p">(</span><span class="n">res.cause.est</span><span class="p">)</span>
       <span class="nf">rm</span><span class="p">(</span><span class="n">cause_res</span><span class="p">)</span>
-      <span class="nf">print</span><span class="p">(</span><span class="nf">proc.time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
-      
     <span class="p">}</span>
     
   <span class="p">}</span>
   
 <span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">proc.time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13219,19 +13221,19 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">cause_elpd</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;Traits_CAUSE_elpd&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">))</span>
 <span class="n">cause_est</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;Traits_CAUSE_est&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">))</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">cause_elpd</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span><span class="s">&quot;model1&quot;</span><span class="p">,</span><span class="s">&quot;model2&quot;</span><span class="p">,</span><span class="s">&quot;delta_elpd&quot;</span><span class="p">,</span> <span class="s">&quot;se_delta_elpd&quot;</span><span class="p">,</span> <span class="s">&quot;Z&quot;</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">cause_est</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;b_l&quot;</span><span class="p">,</span><span class="s">&quot;b_u&quot;</span><span class="p">,</span><span class="s">&quot;eta&quot;</span><span class="p">,</span><span class="s">&quot;eta_l&quot;</span><span class="p">,</span><span class="s">&quot;eta_u&quot;</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="s">&quot;q_l&quot;</span><span class="p">,</span><span class="s">&quot;q_u&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">cause_est</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;beta.hat&quot;</span><span class="p">,</span><span class="s">&quot;b_l&quot;</span><span class="p">,</span><span class="s">&quot;b_u&quot;</span><span class="p">,</span><span class="s">&quot;eta&quot;</span><span class="p">,</span><span class="s">&quot;eta_l&quot;</span><span class="p">,</span><span class="s">&quot;eta_u&quot;</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="s">&quot;q_l&quot;</span><span class="p">,</span><span class="s">&quot;q_u&quot;</span><span class="p">)</span>
 <span class="n">cause_elpd</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">cause_elpd</span><span class="p">,</span> <span class="n">model1</span><span class="o">==</span><span class="s">&quot;sharing&quot;</span><span class="o">&amp;</span><span class="n">model2</span><span class="o">==</span><span class="s">&quot;causal&quot;</span><span class="p">))</span>
 <span class="n">cause_elpd</span><span class="o">$</span><span class="n">pval</span> <span class="o">=</span> <span class="nf">pnorm</span><span class="p">(</span><span class="n">cause_elpd</span><span class="o">$</span><span class="n">Z</span><span class="p">)</span>
-<span class="n">cause_est</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">cause_est[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;b_l&quot;</span><span class="p">,</span><span class="s">&quot;b_u&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">)</span>
+<span class="n">cause_est</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">cause_est[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;beta.hat&quot;</span><span class="p">,</span><span class="s">&quot;b_l&quot;</span><span class="p">,</span><span class="s">&quot;b_u&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">)</span>
 <span class="n">cause_est</span><span class="o">$</span><span class="n">se</span> <span class="o">=</span> <span class="p">(</span><span class="n">cause_est</span><span class="o">$</span><span class="n">b_u</span> <span class="o">-</span> <span class="n">cause_est</span><span class="o">$</span><span class="n">b_l</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="o">/</span><span class="m">1.96</span>
 <span class="n">cause_res</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">merge</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">cause_elpd[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;pval&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">),</span>
-                         <span class="n">cause_est[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span>
+                         <span class="n">cause_est[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Threshold&quot;</span><span class="p">,</span><span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;beta.hat&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span>
                          <span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">)))</span>
 <span class="n">cause_res</span><span class="o">$</span><span class="n">Method</span> <span class="o">=</span> <span class="s">&quot;CAUSE&quot;</span>
 <span class="nf">write.table</span><span class="p">(</span><span class="n">cause_res</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s">&quot;Traits_CAUSE.MRres&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
@@ -13244,13 +13246,47 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">cause_res</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table class="dataframe">
+<caption>A data.frame: 6 × 8</caption>
+<thead>
+	<tr><th></th><th scope=col>exposure</th><th scope=col>outcome</th><th scope=col>pval</th><th scope=col>Threshold</th><th scope=col>nsnp</th><th scope=col>beta.hat</th><th scope=col>se</th><th scope=col>Method</th></tr>
+	<tr><th></th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>AD</td><td>Alcohol </td><td>0.9999999</td><td>0.001</td><td>690</td><td>-0.001000189</td><td>0.01321479</td><td>CAUSE</td></tr>
+	<tr><th scope=row>2</th><td>AD</td><td>Angina  </td><td>0.7051944</td><td>0.001</td><td>656</td><td>-0.013624823</td><td>0.01417754</td><td>CAUSE</td></tr>
+	<tr><th scope=row>3</th><td>AD</td><td>Anorexia</td><td>0.9998904</td><td>0.001</td><td>588</td><td> 0.006302211</td><td>0.02600592</td><td>CAUSE</td></tr>
+	<tr><th scope=row>4</th><td>AD</td><td>ASD     </td><td>0.9999980</td><td>0.001</td><td>683</td><td> 0.007747679</td><td>0.04821366</td><td>CAUSE</td></tr>
+	<tr><th scope=row>5</th><td>AD</td><td>BMI     </td><td>0.3185072</td><td>0.001</td><td>656</td><td>-0.031817131</td><td>0.01925596</td><td>CAUSE</td></tr>
+	<tr><th scope=row>6</th><td>AD</td><td>CAD     </td><td>0.9128530</td><td>0.001</td><td>703</td><td>-0.008380268</td><td>0.01638776</td><td>CAUSE</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
 </div>
 </div>
 

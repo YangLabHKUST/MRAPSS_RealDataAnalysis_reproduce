@@ -14,20 +14,23 @@ ts2 = ts1
 
 Threshold=1e-03
 
+start = proc.time()
 for( exposure in ts1 ){
   
   for( outcome in ts2 ){
     
-    start = proc.time()
+
     
     if(exposure==outcome) next
     
     # read GWAS summary statistics
     cat(exposure,"~",outcome,"\n")
     
-    X1 = readr::read_delim(paste0("./GWAS_26and5_formatted/", exposure), delim="\t", escape_double = FALSE, trim_ws = TRUE, progress = F)
+    X1 = suppressMessages(readr::read_delim(paste0("./GWAS_26and5_formatted/", exposure), delim="\t",
+                                     escape_double = FALSE, trim_ws = TRUE, progress = F))
     
-    X2 = readr::read_delim(paste0("./GWAS_26and5_formatted/", outcome), delim="\t", escape_double = FALSE, trim_ws = TRUE, progress = F)
+    X2 = suppressMessages(readr::read_delim(paste0("./GWAS_26and5_formatted/", outcome), delim="\t",
+                                     escape_double = FALSE, trim_ws = TRUE, progress = F))
     
     X1$b = X1$Z/sqrt(X1$N)
     X2$b = X2$Z/sqrt(X2$N)
@@ -97,26 +100,25 @@ for( exposure in ts1 ){
       rm(res_elpd)
       rm(res.cause.est)
       rm(cause_res)
-      print(proc.time()-start)
-      
     }
     
   }
   
 }
+print(proc.time()-start)
 
 cause_elpd = unique(read.table("Traits_CAUSE_elpd", header = F))
 cause_est = unique(read.table("Traits_CAUSE_est", header = F))
 colnames(cause_elpd) = c("exposure","outcome","Threshold","nsnp","model1","model2","delta_elpd", "se_delta_elpd", "Z")
-colnames(cause_est) = c("exposure","outcome","Threshold","nsnp", "b","b_l","b_u","eta","eta_l","eta_u","q","q_l","q_u")
+colnames(cause_est) = c("exposure","outcome","Threshold","nsnp", "beta.hat","b_l","b_u","eta","eta_l","eta_u","q","q_l","q_u")
 cause_elpd = unique(subset(cause_elpd, model1=="sharing"&model2=="causal"))
 cause_elpd$pval = pnorm(cause_elpd$Z)
-cause_est = unique(cause_est[, c("exposure","outcome","Threshold","nsnp", "b","b_l","b_u")])
+cause_est = unique(cause_est[, c("exposure","outcome","Threshold","nsnp", "beta.hat","b_l","b_u")])
 cause_est$se = (cause_est$b_u - cause_est$b_l)/2/1.96
 cause_res = unique(merge(unique(cause_elpd[, c("exposure","outcome","pval")]),
-                         cause_est[, c("exposure","outcome","Threshold","nsnp", "b","se")],
+                         cause_est[, c("exposure","outcome","Threshold","nsnp", "beta.hat","se")],
                          by=c("exposure","outcome")))
 cause_res$Method = "CAUSE"
 write.table(cause_res, file="Traits_CAUSE.MRres", append=F, col.names = T, row.names = F, quote = F)
 
-
+head(cause_res)

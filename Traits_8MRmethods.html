@@ -13502,7 +13502,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="n">start0</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Weighted-mode uses bootstrap to estimate the standard error. </span>
+<span class="c1"># The standard errors and p values could be slightly different from the MR-APSS paper since we have not set the random seed.</span>
+<span class="n">start0</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
 
 <span class="nf">for</span><span class="p">(</span> <span class="n">exposure</span> <span class="n">in</span> <span class="n">ts1</span> <span class="p">){</span>
   
@@ -13566,10 +13568,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="n">start0</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Weighted-mode uses bootstrap to estimate the standard error. </span>
+<span class="c1"># The standard errors and p values could be slightly different from the MR-APSS paper since we have not set the random seed.</span>
+<span class="n">start0</span> <span class="o">=</span> <span class="nf">proc.time</span><span class="p">()</span>
 
 <span class="nf">for</span><span class="p">(</span> <span class="n">exposure</span> <span class="n">in</span> <span class="n">ts1</span> <span class="p">){</span>
   
@@ -13604,6 +13608,25 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>    user   system  elapsed 
+1412.607    0.884 1414.781 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13633,7 +13656,7 @@ div#notebook {
     <span class="n">nsnp</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">indx</span><span class="p">)</span>
     <span class="nf">if</span><span class="p">(</span><span class="n">nsnp</span> <span class="o">&lt;</span> <span class="m">4</span><span class="p">)</span> <span class="n">next</span>
     
-    <span class="c1">## 3. cML-MA</span>
+    <span class="c1">## cML-MA</span>
     <span class="n">final_dat</span> <span class="o">=</span> <span class="n">dat[indx</span><span class="p">,</span><span class="n">]</span>
     <span class="n">n</span><span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">final_dat</span><span class="o">$</span><span class="n">se.exp^2</span><span class="p">),</span> <span class="nf">median</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">final_dat</span><span class="o">$</span><span class="n">se.out^2</span><span class="p">))</span>
     <span class="n">cML_result</span> <span class="o">=</span> <span class="nf">try</span><span class="p">(</span><span class="nf">suppressWarnings</span><span class="p">(</span><span class="n">MRcML</span><span class="o">::</span><span class="nf">mr_cML_DP</span><span class="p">(</span><span class="n">final_dat</span><span class="o">$</span><span class="n">b.exp</span><span class="p">,</span>
@@ -13657,6 +13680,9 @@ div#notebook {
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="nf">print</span><span class="p">(</span><span class="nf">proc.time</span><span class="p">()</span><span class="o">-</span><span class="n">start0</span><span class="p">)</span>
+
+<span class="c1"># It takes about two weeks for cML-MA to test the trait pairs between 26 traits using the above code.</span>
+<span class="c1"># Noted we set num_pert = 200 for cML-MA.</span>
 </pre></div>
 
     </div>
@@ -13666,13 +13692,62 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">MRmethods_res</span> <span class="o">=</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;Traits_8methods.MRres&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">MRmethods_res</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exposure&quot;</span><span class="p">,</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span><span class="s">&quot;Method&quot;</span><span class="p">,</span> <span class="s">&quot;Threshold&quot;</span><span class="p">,</span> <span class="s">&quot;nsnp&quot;</span><span class="p">,</span> <span class="s">&quot;beta.hat&quot;</span><span class="p">,</span><span class="s">&quot;se&quot;</span><span class="p">,</span> <span class="s">&quot;pval&quot;</span><span class="p">)</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">MRmethods_res</span><span class="p">,</span> <span class="s">&quot;Traits_8methods.MRres&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">append</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span><span class="n">row.names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">MRmethods_res</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table class="dataframe">
+<caption>A data.frame: 6 × 8</caption>
+<thead>
+	<tr><th></th><th scope=col>exposure</th><th scope=col>outcome</th><th scope=col>Method</th><th scope=col>Threshold</th><th scope=col>nsnp</th><th scope=col>beta.hat</th><th scope=col>se</th><th scope=col>pval</th></tr>
+	<tr><th></th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>AD</td><td>ASD               </td><td>IVW</td><td>5e-08</td><td>11</td><td>-0.008432428</td><td>0.07375786</td><td>0.908979515</td></tr>
+	<tr><th scope=row>2</th><td>AD</td><td>Daytime_Sleepiness</td><td>IVW</td><td>5e-08</td><td>11</td><td> 0.004928477</td><td>0.01385606</td><td>0.722071954</td></tr>
+	<tr><th scope=row>3</th><td>AD</td><td>Height_UKB        </td><td>IVW</td><td>5e-08</td><td>10</td><td> 0.035147988</td><td>0.01545097</td><td>0.022917420</td></tr>
+	<tr><th scope=row>4</th><td>AD</td><td>Intelligence      </td><td>IVW</td><td>5e-08</td><td>10</td><td> 0.028844257</td><td>0.02704256</td><td>0.286141392</td></tr>
+	<tr><th scope=row>5</th><td>AD</td><td>RA                </td><td>IVW</td><td>5e-08</td><td>10</td><td>-0.049234471</td><td>0.03961648</td><td>0.213949846</td></tr>
+	<tr><th scope=row>6</th><td>AD</td><td>T2D               </td><td>IVW</td><td>5e-08</td><td>11</td><td>-0.062044500</td><td>0.01938304</td><td>0.001369664</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
 </div>
 </div>
 
